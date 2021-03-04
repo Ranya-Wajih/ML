@@ -71,10 +71,10 @@ a=2-2*(t/T);
 A=2*a*rand()-a;
    %% Exploration 
     if abs(A) >= 1
-      q=rand(); 
+      r=rand(); 
    
       %perching based on Random location 
-      if q >= 0.5
+      if r >= 0.5
           rand_Hawk_index= floor(N*rand()+1);
           X_rand=X(rand_Hawk_index,:);
           r1= rand(); C=2*rand();
@@ -82,7 +82,7 @@ A=2*a*rand()-a;
           X(i,:)=X_rand-rand*r1*abs(X_rand -rand()-2*C*X(i,d));
         end
         %perching based on other family member
-      elseif q < 0.5
+      elseif r < 0.5
         r3=rand(); C=2*rand();
         for d=1:D
           X(i,:)=(Xp(1,:)-Xm(d))-r3*(lb+C*(ub-lb));
