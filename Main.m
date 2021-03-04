@@ -50,7 +50,7 @@
 
 clc, clear, close; 
 % Benchmark data set 
-load Tic-tac-toe.mat; 
+load Zoo.mat; 
 % Parameter setting
 N=10; T=100;
 % Binary Grey Wolf Optimizer with Harris Hawk Optimization
