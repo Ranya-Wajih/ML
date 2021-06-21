@@ -1,32 +1,4 @@
 
- %Hybrid Binary Grey Wolf with Harris Hawks Optimizer for
-%              Feature Selection 
-%           By: Ranya Al-wajih, Said Jadid,NORSHAKIRAH AZIZ1,
-%            QASEM AL-TASHI1,and NOUREEN TALPUR1 
-%         
-%           email: rania.wajih@gmail.com
-% 
-%                Main paper: Ranya Al-wajih                                 %
-%         Hybrid Binary Grey Wolf with Harris Hawks Optimizer for
-%                 Feature Selection 
-%                           
-%                                                                                      %
-%  Developed in MATLAB R2017a                                             %
-%                                                                         %
-%  the original code of GWO is availble on
- %         e-Mail: ali.mirjalili@gmail.com                           %
-%                 seyedali.mirjalili@griffithuni.edu.au             %
-%                                                                   %
-%       Homepage: http://www.alimirjalili.com                       %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% I acknowledge that this version of BGWOHHO has been written using
-% a  portion of the following code:
-%---------------------------------------------------------------------
-%  MATLAB Code for                                                      %
-% Too, Jingwei, et al. “A New Competitive Binary Grey Wolf Optimizer to %
-% Solve the Feature Selection Problem in EMG Signals Classification.”   %
-% Computers, vol. 7, no. 4, MDPI AG, Nov. 2018, p. 58,                  %
-% doi:10.3390/computers7040058.                                         %
 
 %-------------------------------------------------------------------------%
 %  Binary Grey Wolf Optimizer with Harris Hawk Optimization (BGWOBHHO) 
@@ -44,24 +16,29 @@
 % sFeat:  Selected features
 % Sf:     Selected feature index
 % Nf:     Number of selected features
-% Conv_curve:  Convergence curve
+% curve:  Convergence curve
 %--------------------------------------------------------------------------
 
 
 clc, clear, close; 
 % Benchmark data set 
-load Zoo.mat; 
+load Exactly2.mat;
+
+% Set 20% data as validation set
+ho = 0.2; 
+% Hold-out method
+HO = cvpartition(label,'HoldOut',ho);
+
 % Parameter setting
 N=10; T=100;
 % Binary Grey Wolf Optimizer with Harris Hawk Optimization
 tic
 [sFeat,Sf,Nf,Conv_curve]= BGWOHHO(feat,label,N,T);
-time=toc;
+time= toc;
 
+%Accuracy
+Acc = acc(sFeat,label,HO); 
 % Plot convergence curve
-figure(); 
-plot(1:T,Conv_curve); xlabel('Number of iterations');
+figure(); plot(1:T,Conv_curve); xlabel('Number of iterations');
 ylabel('Fitness Value'); title('BGWOHHO'); grid on;
-fprintf('thybridDimensions: %f\thybrid Fitness:  %f\thybridTime: %f\n',...,
-    Nf,mean(Conv_curve),time);
-
+fprintf('Accuracy: %f/ the hybrid Fitness: %f/the hybrid Dimensions: %f/ the hybrid Time: %f/n',Acc,mean(Conv_curve),Nf,time);
