@@ -1,9 +1,9 @@
 %-------------------------------------------------------------------------%
-%  Fitness Function (Error Rate) source codes demo version                %
+%  (Error Rate) source codes demo version                %
 %         
 %
 %-------------------------------------------------------------------------%
-function fitness=FitnessFunction(feat,label,X)
+function fitness=get_function(feat,label,X)
 if sum(X==1)==0
   fitness=inf;
 else
